@@ -9,6 +9,9 @@ FILE = 'binarydata.txt'
 BUCKET = 'marinovbucket'
 
     
+print('')
+
+
 @app.put("/api/v1//create-data/", status_code=201)
 def put_data(key, value):
     """Creating data on the cloud with a key and a value"""
@@ -37,9 +40,12 @@ def get_data(key):
 def get_json_from_s3():
     """Retrieving a file from the cloud and converting it to a JSON"""
     try:
-        obj = s3.get_object(Bucket=BUCKET, Key=FILE)
-        data = obj['Body'].read()
-        return json.loads(data.decode(encoding='utf-8'))
+        try:
+            obj = s3.get_object(Bucket=BUCKET, Key=FILE)
+            data = obj['Body'].read()
+            return json.loads(data.decode(encoding='utf-8'))
+        except:
+            return {}
     except:
         return None
 
