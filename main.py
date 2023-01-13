@@ -9,9 +9,6 @@ FILE = 'binarydata.txt'
 BUCKET = 'marinovbucket'
 
     
-print('')
-
-
 @app.put("/api/v1//create-data/", status_code=201)
 def put_data(key, value):
     """Creating data on the cloud with a key and a value"""
